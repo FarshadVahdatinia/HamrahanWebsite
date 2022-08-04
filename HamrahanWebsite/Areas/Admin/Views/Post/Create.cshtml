@@ -1,0 +1,65 @@
+﻿@model HamrahanTemplate.Application.DTOs.PostDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>PostDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagesLink" class="control-label"></label>
+                <input asp-for="ImagesLink" class="form-control" />
+                <span asp-validation-for="ImagesLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonID" class="control-label"></label>
+                <input asp-for="PersonID" class="form-control" />
+                <span asp-validation-for="PersonID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label"></label>
+                <input asp-for="Topic" class="form-control" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Updated" class="control-label"></label>
+                <input asp-for="Updated" class="form-control" />
+                <span asp-validation-for="Updated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Published" class="control-label"></label>
+                <input asp-for="Published" class="form-control" />
+                <span asp-validation-for="Published" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

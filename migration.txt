@@ -1,0 +1,180 @@
+﻿ migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                table: "AspNetUserClaims");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                table: "AspNetUserLogins");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                table: "AspNetUserRoles");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                table: "AspNetUserTokens");
+
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Person_AspNetUsers_Id",
+            //    schema: "Person",
+            //    table: "Person");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.AddColumn<int>(
+                name: "AccessFailedCount",
+                schema: "Person",
+                table: "Person",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<string>(
+                name: "ConcurrencyStamp",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Email",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(256)",
+                maxLength: 256,
+                nullable: true);
+
+            migrationBuilder.AddColumn<bool>(
+                name: "EmailConfirmed",
+                schema: "Person",
+                table: "Person",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+
+            migrationBuilder.AddColumn<bool>(
+                name: "LockoutEnabled",
+                schema: "Person",
+                table: "Person",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+
+            migrationBuilder.AddColumn<DateTimeOffset>(
+                name: "LockoutEnd",
+                schema: "Person",
+                table: "Person",
+                type: "datetimeoffset",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "NormalizedEmail",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(256)",
+                maxLength: 256,
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "NormalizedUserName",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(256)",
+                maxLength: 256,
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "PasswordHash",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "PhoneNumber",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<bool>(
+                name: "PhoneNumberConfirmed",
+                schema: "Person",
+                table: "Person",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+
+            migrationBuilder.AddColumn<string>(
+                name: "SecurityStamp",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<bool>(
+                name: "TwoFactorEnabled",
+                schema: "Person",
+                table: "Person",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+
+            migrationBuilder.AddColumn<string>(
+                name: "UserName",
+                schema: "Person",
+                table: "Person",
+                type: "nvarchar(256)",
+                maxLength: 256,
+                nullable: true);
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                schema: "Person",
+                table: "Person",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                schema: "Person",
+                table: "Person",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserClaims_Person_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId",
+                principalSchema: "Person",
+                principalTable: "Person",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserLogins_Person_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId",
+                principalSchema: "Person",
+                principalTable: "Person",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserRoles_Person_UserId",
+                table: "AspNetUserRoles",
+                column: "UserId",
+                principalSchema: "Person",
+                principalTable: "Person",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserTokens_Person_UserId",
+                table: "AspNetUserTokens",
+                column: "UserId",
+                principalSchema: "Person",
+                principalTable: "Person",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);

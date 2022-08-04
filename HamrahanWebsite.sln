@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hamrahan.Models", "Hamrahan.Models\Hamrahan.Models.csproj", "{51FC3933-6BBC-4B11-A26D-DF83261F37B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CheatSheet", "CheatSheet", "{F656B0FB-F910-4857-A944-F7B646C4315B}"
+	ProjectSection(SolutionItems) = preProject
+		migration.txt = migration.txt
+		Note.txt = Note.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamrahanTemplate.persistence", "Contexts\HamrahanTemplate.persistence.csproj", "{CF734EDD-0E5D-489F-A7E6-22595F07796C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{787B5F17-9E65-4374-8A8F-C4374235C450}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{111C614D-FFBF-4442-9928-CB860A2F67DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{E9A590B7-0498-42E4-8331-D9ECEBB2123E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{EDB58BBC-2942-421C-8B16-3954D986FD81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FarshadTools", "FarshadTools\FarshadTools.csproj", "{47AFFD27-E9AC-4DE0-B42D-E041F229A462}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1A2DED71-78F7-4F4E-935D-1478C084BDE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamrahanTemplate.Application", "HamrahanTemplates.Application\HamrahanTemplate.Application.csproj", "{6A584B59-13B4-455D-AD4A-0464D9595B73}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamrahanTemplate.Infrastructure", "HamrahanTemplate.Infrastructure\HamrahanTemplate.Infrastructure.csproj", "{E3194328-08D7-4875-B529-D54D9FD2B193}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamrahanWebsite", "HamrahanWebsite\HamrahanWebsite.csproj", "{970CCADA-BBA7-4FBB-80EC-E0A0349868F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamrahanAPI", "HamrahanAPI\HamrahanAPI.csproj", "{996CB0BB-44CA-40D9-A3C5-F47257140944}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51FC3933-6BBC-4B11-A26D-DF83261F37B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51FC3933-6BBC-4B11-A26D-DF83261F37B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51FC3933-6BBC-4B11-A26D-DF83261F37B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51FC3933-6BBC-4B11-A26D-DF83261F37B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF734EDD-0E5D-489F-A7E6-22595F07796C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF734EDD-0E5D-489F-A7E6-22595F07796C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF734EDD-0E5D-489F-A7E6-22595F07796C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF734EDD-0E5D-489F-A7E6-22595F07796C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47AFFD27-E9AC-4DE0-B42D-E041F229A462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47AFFD27-E9AC-4DE0-B42D-E041F229A462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47AFFD27-E9AC-4DE0-B42D-E041F229A462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47AFFD27-E9AC-4DE0-B42D-E041F229A462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A584B59-13B4-455D-AD4A-0464D9595B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A584B59-13B4-455D-AD4A-0464D9595B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A584B59-13B4-455D-AD4A-0464D9595B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A584B59-13B4-455D-AD4A-0464D9595B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3194328-08D7-4875-B529-D54D9FD2B193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3194328-08D7-4875-B529-D54D9FD2B193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3194328-08D7-4875-B529-D54D9FD2B193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3194328-08D7-4875-B529-D54D9FD2B193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{970CCADA-BBA7-4FBB-80EC-E0A0349868F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970CCADA-BBA7-4FBB-80EC-E0A0349868F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970CCADA-BBA7-4FBB-80EC-E0A0349868F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970CCADA-BBA7-4FBB-80EC-E0A0349868F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996CB0BB-44CA-40D9-A3C5-F47257140944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996CB0BB-44CA-40D9-A3C5-F47257140944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996CB0BB-44CA-40D9-A3C5-F47257140944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996CB0BB-44CA-40D9-A3C5-F47257140944}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{51FC3933-6BBC-4B11-A26D-DF83261F37B7} = {1A2DED71-78F7-4F4E-935D-1478C084BDE3}
+		{CF734EDD-0E5D-489F-A7E6-22595F07796C} = {E9A590B7-0498-42E4-8331-D9ECEBB2123E}
+		{E9A590B7-0498-42E4-8331-D9ECEBB2123E} = {787B5F17-9E65-4374-8A8F-C4374235C450}
+		{EDB58BBC-2942-421C-8B16-3954D986FD81} = {787B5F17-9E65-4374-8A8F-C4374235C450}
+		{47AFFD27-E9AC-4DE0-B42D-E041F229A462} = {111C614D-FFBF-4442-9928-CB860A2F67DD}
+		{1A2DED71-78F7-4F4E-935D-1478C084BDE3} = {787B5F17-9E65-4374-8A8F-C4374235C450}
+		{6A584B59-13B4-455D-AD4A-0464D9595B73} = {1A2DED71-78F7-4F4E-935D-1478C084BDE3}
+		{E3194328-08D7-4875-B529-D54D9FD2B193} = {E9A590B7-0498-42E4-8331-D9ECEBB2123E}
+		{970CCADA-BBA7-4FBB-80EC-E0A0349868F6} = {EDB58BBC-2942-421C-8B16-3954D986FD81}
+		{996CB0BB-44CA-40D9-A3C5-F47257140944} = {EDB58BBC-2942-421C-8B16-3954D986FD81}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {744FA6CB-3897-49F8-82FC-D04E5DFE29D0}
+	EndGlobalSection
+EndGlobal

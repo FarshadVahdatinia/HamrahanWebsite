@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contexts\HamrahanTemplate.persistence.csproj" />
+    <ProjectReference Include="..\FarshadTools\FarshadTools.csproj" />
+    <ProjectReference Include="..\HamrahanTemplates.Application\HamrahanTemplate.Application.csproj" />
+  </ItemGroup>
+
+</Project>

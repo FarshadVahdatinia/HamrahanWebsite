@@ -1,0 +1,289 @@
+﻿
+
+List<TestDTO> tests = new();
+            var x = _unitOfWork.personRepository.Get().ToList();
+            foreach (var item in x)
+            {
+                tests.Add(new TestDTO { Name = item.FullName });
+            }
+            return View(tests);
+--------------------------------------------------------------------------------------------------------------
+
+public class PersonController : Controller
+    {
+        private readonly UnitOfWork _unitOfWork;
+        public PersonController(UnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        // GET: PersonController
+        public ActionResult Index()
+        {
+            List<TestDTO> tests = new();
+            var x = _unitOfWork.personRepository.Get().ToList();
+            foreach (var item in x)
+            {
+                tests.Add(new TestDTO { Name = item.FullName });
+            }
+            return View(tests);
+        }
+
+        // GET: PersonController/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
+         
+        // GET: PersonController/Create
+        public ActionResult Create()
+        {   
+            return View();
+        }
+
+        // POST: PersonController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(TestDTO personDTO)
+        {
+            try
+            {
+                Person p = new();
+                p.FirstName = personDTO.Name;
+                _unitOfWork.personRepository.Insert(p);
+                _unitOfWork.SaveChange();
+                return RedirectToAction(nameof(Create));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: PersonController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: PersonController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: PersonController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: PersonController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+
+--------------------------------------------------------------------------------------------------------------
+    namespace InMemoryContext.DTO
+{
+    public class TestDTO
+    {
+      
+        [DisplayName("نام")]
+        public string Name { get; set; }
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+amespace InMemoryContext.Contract.Repositories
+{
+    public class PersonRepository: IPersonRepository<Person> 
+    {
+        MyDbContext _dbContext;
+        DbSet<Person> _dbset;
+        public PersonRepository(MyDbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _dbset = _dbContext.Set<Person>();
+        }
+        public bool Delete(Person entity)
+        {
+            if (entity ==null)
+            {
+                return false;
+            }
+            _dbset.Attach(entity);
+            _dbset.Remove(entity);
+            return true;
+        }
+
+        public IQueryable<Person> Get()
+        {
+            return _dbset;
+        }
+
+        public IQueryable<Person> Get(Expression<Func<Person, bool>> expression)
+        {
+            //return (IQueryable<TEntity>)_dbset.Where(expression).ToList();
+            return _dbset.Where(expression);
+        }
+
+        public Person GetPersonByID(int id)
+        {
+           return _dbset.Find(id);
+        }
+
+        public bool Insert(Person entity)
+        {
+            if (entity == null)
+            {
+                return false;
+            }
+            _dbset.Add(entity);
+            return true;
+        }
+
+        public bool Update(Person entity)
+        {
+            if (entity == null)
+            {
+                return false;
+            }
+            _dbset.Attach(entity);
+            _dbset.Update(entity);
+            return true;
+        }
+    }
+--------------------------------------------------------------------------------------------------------------
+    @model IEnumerable<InMemoryContext.DTO.TestDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in @Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>
+--------------------------------------------------------------------------------------------------------------
+using InMemoryModel;
+using InMemoryContext.Contract.IRepositories;
+using InMemoryContext.Contract.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InMemoryContext.Context
+{
+    public class UnitOfWork : IDisposable
+    {
+       private MyDbContext _DbContext;
+
+       IPersonRepository<Person> _personRepository;
+
+        public UnitOfWork()
+        {
+
+        }
+
+        public MyDbContext MyDbContext 
+        {
+            get
+            {
+                if (_DbContext != null)
+                    _DbContext = new MyDbContext();
+
+                return _DbContext;
+            }
+} 
+
+        public IPersonRepository<Person> personRepository 
+        {
+            get
+            {
+                if (_personRepository == null)
+                {
+                    _personRepository = new PersonRepository(_DbContext);
+                }
+                return _personRepository;
+            }
+        }
+
+        public void Dispose()
+        {
+            _DbContext.Dispose();
+        }
+
+        public void SaveChange()
+        {
+            _DbContext.SaveChanges();
+        }
+    }
+}
+
+
+
+
+-----------------------------------------------------------------------
+ var personDto = new ApiUserDTO
+                    {
+                        id = customer.Id,
+                        FirstName = customer.FirstName,
+                        Lastname = customer.Lastname,
+                        TelePhone = customer.TelePhone,
+                        PhoneNumber = customer.PhoneNumber,
+                        Age = customer.Age,
+                        UserName = customer.Email,
+                        EducationGradeName = _uow.Grade.Find(t => t.Code == customer.EducationGradecode).Result.FirstOrDefault().Grade,
+                        Gender = customer.Gender
+
+                    };

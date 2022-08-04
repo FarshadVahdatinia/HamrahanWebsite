@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HamrahanTemplate.Application.DTOs.EducatinGradeDTO>
+
+@{
+    ViewData["Title"] = "صفحه افزودن رده های تحصیلی";
+}
+
+<h2>صفحه افزودن رده های تحصیلی</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.ActionLink("ویرایش", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("جزئیات", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("حذف", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

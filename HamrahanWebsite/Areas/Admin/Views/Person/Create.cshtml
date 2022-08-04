@@ -1,0 +1,126 @@
+﻿@model HamrahanTemplate.Application.DTOs.PersonDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+    <link href="/persinacalender/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet" />
+
+    <h1>Create</h1>
+
+
+    <h4>PersonDTO</h4>
+    <hr />
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-danger">
+            <text>@TempData["Message"]</text>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" asp-area="Admin" asp-controller="Person" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Lastname" class="control-label"></label>
+                    <input asp-for="Lastname" class="form-control" />
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NationalCode" class="control-label"></label>
+                    <input asp-for="NationalCode" class="form-control" />
+                    <span asp-validation-for="NationalCode" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="sr-only" asp-for="Birthdate">تاریخ و زمان</label>
+                    <div class="input-group">
+                        <div class="input-group-addon" data-MdDateTimePicker="true" data-targetselector="#exampleInput1" data-trigger="click" data-enabletimepicker="false">
+                            <span id="dateInput" class="glyphicon glyphicon-calendar" asp-validation-for="Birthdate"></span>
+                        </div>
+                        <input type="datetime" asp-for="Birthdate" class="form-control" id="exampleInput1" placeholder="تاریخ به همراه زمان" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Birthdate" class="sr-only"></label>
+                    <div id="Birthdate" class="input-group">
+                        <div class="input-group-addon" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#Birthdate" data-groupid="group1"
+                             data-f="true" data-enabletimepicker="true" data-placement="bottom">
+                            <span id="Birthdate" class="glyphicon glyphicon-calendar" asp-validation-for="Birthdate"></span>
+                        </div>
+                        <input  asp-for="Birthdate" class="form-control circleInput"
+                               placeholder="تاريخ" id="Birthdate" name="Birthdate" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TelePhone" class="control-label"></label>
+                    <input asp-for="TelePhone" class="form-control" />
+                    <span asp-validation-for="TelePhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EducationGradeCode" class="control-label"></label>
+                    <select asp-for="EducationGradeCode" class="form-control" asp-items="ViewBag.EducationGradeCode">
+                        <option disabled selected>--مقطع تحصیلی --</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Gender" /> @Html.DisplayNameFor(model => model.Gender)
+                    </label>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" formmethod="post" asp-action="Create" asp-area="Admin" asp-controller="Person" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <script src="/persinacalender/jquery.md.bootstrap.datetimepicker.js"></script>
+<script type="text/javascript">
+    $('#Birthdate').MdPersianDateTimePicker({
+        targetTextSelector: '#Birthdate',
+        targetDateSelector: '#Birthdate',
+    });
+</script>
+
