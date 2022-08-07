@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
@@ -95,37 +96,37 @@ namespace HamrahanAPI
 
            .ConfigureApiBehaviorOptions(a =>
            {   //setting more details of requests
-                a.InvalidModelStateResponseFactory = context =>
-               {
-                   var problemDetailsFactory = context.HttpContext.RequestServices.GetRequiredService<ProblemDetailsFactory>();
-                   var problemDetail = problemDetailsFactory.CreateValidationProblemDetails(
-                       context.HttpContext,
-                       context.ModelState);
-                    //add aditional info not added by default
-                    problemDetail.Detail = "See The Error Field";
-                   problemDetail.Instance = context.HttpContext.Request.Path;
+               a.InvalidModelStateResponseFactory = context =>
+              {
+                  var problemDetailsFactory = context.HttpContext.RequestServices.GetRequiredService<ProblemDetailsFactory>();
+                  var problemDetail = problemDetailsFactory.CreateValidationProblemDetails(
+                      context.HttpContext,
+                      context.ModelState);
+                   //add aditional info not added by default
+                   problemDetail.Detail = "See The Error Field";
+                  problemDetail.Instance = context.HttpContext.Request.Path;
 
-                    //find out hich status code to use
-                    var actionExecutingContext = context as Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext;
-                   if ((context.ModelState.ErrorCount > 0) && (actionExecutingContext?.ActionArguments.Count ==
-                   context.ActionDescriptor.Parameters.Count))
-                   {
-                       problemDetail.Status = StatusCodes.Status422UnprocessableEntity;
-                       problemDetail.Title = "validation error occurred";
-                       return new UnprocessableEntityObjectResult(problemDetail)
-                       {
-                           ContentTypes = { "application/problem+json" }
-                       };
-                   };
+                   //find out hich status code to use
+                   var actionExecutingContext = context as Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext;
+                  if ((context.ModelState.ErrorCount > 0) && (actionExecutingContext?.ActionArguments.Count ==
+                  context.ActionDescriptor.Parameters.Count))
+                  {
+                      problemDetail.Status = StatusCodes.Status422UnprocessableEntity;
+                      problemDetail.Title = "validation error occurred";
+                      return new UnprocessableEntityObjectResult(problemDetail)
+                      {
+                          ContentTypes = { "application/problem+json" }
+                      };
+                  };
 
-                   problemDetail.Status = StatusCodes.Status400BadRequest;
-                   problemDetail.Title = "errors on input occurred";
-                   return new BadRequestObjectResult(problemDetail)
-                   {
-                       ContentTypes = { "application/problem+json" }
-                   };
+                  problemDetail.Status = StatusCodes.Status400BadRequest;
+                  problemDetail.Title = "errors on input occurred";
+                  return new BadRequestObjectResult(problemDetail)
+                  {
+                      ContentTypes = { "application/problem+json" }
+                  };
 
-               };
+              };
            });
             #endregion
             //adding auto mapper to project
@@ -154,8 +155,10 @@ namespace HamrahanAPI
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            public void Configure(ILoggerFactory logger,IApplicationBuilder app, IWebHostEnvironment env)
             {
+            
+           
                 if (env.IsDevelopment())
                 {
                     app.UseDeveloperExceptionPage();

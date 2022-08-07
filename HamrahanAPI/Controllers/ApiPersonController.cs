@@ -4,7 +4,9 @@ using HamrahanTemplate.Application.DTOs;
 using HamrahanTemplate.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,11 @@ namespace HamrahanAPI.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<Person> _userManager;
         private readonly IMapper _mapper;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger;
 
-        public ApiPersonController(IUow uow, RoleManager<IdentityRole> roleManager, UserManager<Person> userManager, IMapper mapper)
+        public ApiPersonController(ILogger<ApiPersonController> logger, IUow uow, RoleManager<IdentityRole> roleManager, UserManager<Person> userManager, IMapper mapper)
         {
+            _logger = logger;
             _uow = uow;
             _roleManager = roleManager;
             _userManager = userManager;
@@ -63,7 +67,9 @@ namespace HamrahanAPI.Controllers
             }
             var user = new ObjectResult(personDTO)
             {
+                
                 StatusCode = (int)HttpStatusCode.OK
+               
             };
 
             return Ok(user);
@@ -251,6 +257,31 @@ namespace HamrahanAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpPatch ]
+        public IActionResult UpdateWithPatch(string id,[FromBody] JsonPatchDocument<ApiUpdateDTO> patchDocument)
+        {
+            if (patchDocument == null)
+            {
+                return BadRequest();
+
+            }
+
+            if (!_uow.Person.IsExists(id).Result)
+            {
+                return NotFound();
+
+            }
+            var user = _uow.Person.FindById(id).Result;
+            
+            var userToPatch = _mapper.Map<ApiUpdateDTO>(user);
+            
+            patchDocument.ApplyTo(userToPatch);
+           var a= _mapper.Map(userToPatch, user);
+            _uow.Person.Update(user);
+            return Ok() ;
+
         }
     }
 }

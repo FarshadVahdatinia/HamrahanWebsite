@@ -4,7 +4,9 @@ using HamrahanTemplate.Infrastructure.UnitOfWork;
 using HamrahanWebsite.Areas.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -12,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System;
 
 namespace HamrahanWebsite
@@ -88,23 +92,40 @@ namespace HamrahanWebsite
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddProvider(new NLog.Extensions.Logging.NLogLoggerProvider());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-           
-            }
-      
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+
             }
 
-            
-            
+            else
+            {
+                app.UseExceptionHandler(builder => builder.Run(async context =>
+                {
+
+                    var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    if (exceptionHandlerFeature != null)
+                    {
+                        var logger = loggerFactory.CreateLogger("Bad Request That you've Done");
+                        logger.LogError(500, exceptionHandlerFeature.Error, exceptionHandlerFeature.Error.Message);
+
+
+                    }
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync("Something Went Wrong!!");
+                }));
+
+
+              
+            }
+
+        
+
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             
